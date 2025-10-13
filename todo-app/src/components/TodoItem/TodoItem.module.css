@@ -1,0 +1,32 @@
+.item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    transition: background-color 0.3s;
+   }
+   
+   .completed {
+    background-color: #e6ffe6;
+   }
+   
+   .checkbox {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+    accent-color: #007bff;
+   }
+   
+   .text {
+    margin-right: 20px;
+    font-size: 16px;
+   }
+   
+   .completed .text {
+    text-decoration: line-through;
+    color: #888;
+   }
+   
+   .item:hover {
+    background-color: #f8f8f8;
+    cursor: pointer;
+   }
