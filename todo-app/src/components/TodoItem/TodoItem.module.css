@@ -1,32 +1,48 @@
-.item {
+.item, .completed {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    padding: 12px 0;
+    padding: 12px;
     transition: background-color 0.3s;
-   }
-   
-   .completed {
-    background-color: #e6ffe6;
-   }
-   
-   .checkbox {
+    background-color: var(--task-bg);
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.completed {
+    background: var(--completed-task-bg);
+    
+}
+
+.checkbox {
     margin-right: 10px;
     transform: scale(1.2);
     cursor: pointer;
     accent-color: #007bff;
-   }
-   
-   .text {
+}
+
+.text {
     margin-right: 20px;
-    font-size: 16px;
-   }
-   
-   .completed .text {
+    font-size: 20px;
+}
+
+.completed .text {
     text-decoration: line-through;
-    color: #888;
-   }
-   
-   .item:hover {
-    background-color: #f8f8f8;
+    color: var(--completed-text-color);
+}
+
+.item:hover {
+    background-color: var(--task-hover-bg);
     cursor: pointer;
-   }
+}
+
+.deleteButton{
+    float: right;
+    color: rgba(194, 8, 8, 0.712);
+    font-size: 24px
+}
+
+.editButton{
+    color: rgba(16, 157, 192, 0.712);
+    font-size: 24px
+}

@@ -2,17 +2,12 @@ import './styles.css';
 import Header from './components/Header/Header';
 import TodoList from './components/TodoList/TodoList';
 import AddTaskForm from './components/AddTaskForm/AddTaskForm';
-import { useState } from 'react';
-
-
+import useLocalStorage from './hooks/useLocalStorage';
+import { useEffect } from 'react';
 
 const App = () => {
-  const [tasks, setTasks] = useState([
-    { id: 1, text: 'Изучить React', completed: false },
-    { id: 2, text: 'Создать макет ToDo листа', completed: true },
-    { id: 3, text: 'Закрепить знания', completed: false },
-    { id: 4, text: 'Пьём кофе с печеньками и радуемся выполнению)', completed: false }
-  ]);
+
+  const [tasks, setTasks] = useLocalStorage('tasks', []);
 
   const handleCheckboxChange = (taskId) => {
     setTasks(prevTasks => prevTasks.map(task => {
@@ -23,13 +18,44 @@ const App = () => {
     }));
   };
 
+  useEffect(() => {
+    const activeTasks = tasks.filter(task => !task.completed);
+    document.title = `ToDo list - ${activeTasks.length} активных задач`;
+  }), [tasks]
+
+  const generateTaskId = () => {
+    return tasks.length > 0 
+      ? Math.max(...tasks.map(task => task.id)) + 1 
+      : 1;
+  };
+
+  const addTask = (newTask) => {
+    const newID = generateTaskId();
+    setTasks([...tasks, {id:newID, ...newTask}]);
+  }
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+
+  const editTask = (id, newText) => {
+    setTasks(prevTask => prevTask.map(task => {
+      if(task.id === id){
+        return {...task, text: newText}
+      }
+      return task
+    }))
+  }
+
   return (
     <div className="app">
       <Header title="My ToDo list" />
-      <AddTaskForm />
+      <AddTaskForm onAdd={addTask}/>
       <TodoList 
         tasks={tasks} 
         onCheckboxChange={handleCheckboxChange} 
+        onDelete={deleteTask}
+        onEdit={editTask}
       />
     </div>
   );
