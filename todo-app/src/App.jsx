@@ -3,12 +3,13 @@ import Header from './components/Header/Header';
 import TodoList from './components/TodoList/TodoList';
 import AddTaskForm from './components/AddTaskForm/AddTaskForm';
 import useLocalStorage from './hooks/useLocalStorage';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import SearchBar from './components/SearchBar/SearchBar';
 
 const App = () => {
 
   const [tasks, setTasks] = useLocalStorage('tasks', []);
-
+  const [searchTasks, setSearchTasks] = useState([])
   const handleCheckboxChange = (taskId) => {
     setTasks(prevTasks => prevTasks.map(task => {
       if (task.id === taskId) {
@@ -31,7 +32,7 @@ const App = () => {
 
   const addTask = (newTask) => {
     const newID = generateTaskId();
-    setTasks([...tasks, {id:newID, ...newTask}]);
+    setTasks([...tasks, {id:newID, ...newTask, addedTo: Date.now()}]);
   }
 
   const deleteTask = (id) => {
@@ -47,12 +48,14 @@ const App = () => {
     }))
   }
 
+
   return (
     <div className="app">
       <Header title="My ToDo list" />
+      <SearchBar tasks={tasks} setSearchTasks={setSearchTasks}/>
       <AddTaskForm onAdd={addTask}/>
       <TodoList 
-        tasks={tasks} 
+        tasks={searchTasks.length > 0 ? searchTasks : tasks} 
         onCheckboxChange={handleCheckboxChange} 
         onDelete={deleteTask}
         onEdit={editTask}

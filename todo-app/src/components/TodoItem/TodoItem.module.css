@@ -24,6 +24,7 @@
 .text {
     margin-right: 20px;
     font-size: 20px;
+    max-width: 80%; 
 }
 
 .completed .text {
@@ -37,12 +38,16 @@
 }
 
 .deleteButton{
-    float: right;
     color: rgba(194, 8, 8, 0.712);
-    font-size: 24px
+    font-size: 24px;
 }
 
 .editButton{
     color: rgba(16, 157, 192, 0.712);
-    font-size: 24px
+    font-size: 24px;
+}
+
+.infoButton{
+    color: rgba(16, 192, 177, 0.712);
+    font-size: 24px;
 }
