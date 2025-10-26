@@ -3,16 +3,16 @@
     border-collapse: collapse;
     margin: 20px 0;
     font-family: Arial, sans-serif;
-    color: #fff;
+    color: var(--text);
 }
 
 .infoForm td {
-    background-color: #222;
+    background-color: var(--bg-main);
     padding: 12px;
     vertical-align: top;
     text-align: right;
     width: 70%;
-    border: 1px solid #444;
+    border: 1px solid var(--input-border);
     font-weight: bold;
 }
 
@@ -20,8 +20,8 @@
     padding: 12px;
     vertical-align: top;
     text-align: left;
-    border: 1px solid #444;
-    background-color: #333;
+    border: 1px solid var(--input-border);
+    background-color: var(--bg-main);
 }
 
 @media (max-width: 600px) {
@@ -37,7 +37,7 @@
 }
 
 .infoForm tr:hover {
-    background-color: #444;
+    background-color: #bbbbbba2;
 }
 
 .infoForm td,
